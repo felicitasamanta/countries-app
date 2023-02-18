@@ -1,0 +1,33 @@
+.countries {
+  padding: 60px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  background-color: #e3ffe3;
+  min-height: 100vh;
+  color: #789678;
+
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    a {
+      background-color: #8fff8f;
+      border-radius: 20px;
+      padding: 10px;
+      width: 150px;
+      height: 35px;
+      text-align: center;
+    }
+
+    .left {
+      display: flex;
+      gap: 20px;
+    }
+    .right {
+      display: flex;
+    }
+  }
+}
