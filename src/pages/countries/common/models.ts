@@ -10,4 +10,5 @@ export type Countries = Country[];
 export enum Region {
   ALL = "All",
   OCEANIA = "Oceania",
+  LITHUANIA = "Lithuania",
 }

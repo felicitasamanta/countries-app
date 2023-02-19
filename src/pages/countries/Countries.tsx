@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Order } from "../../common/models";
+import { api } from "./common/api";
 import * as Types from "./common/models";
 import "./common/styles/countries.scss";
 import { Country } from "./components/Country";
@@ -54,17 +55,21 @@ const Countries = () => {
   const [countries, setCountries] = useState<Types.Countries>([]);
   const [region, setRegion] = useState<Types.Region>(Types.Region.ALL);
   const [order, setOrder] = useState<Order>(Order.ASC);
+  const [areaRegion, setAreaRegion] = useState<Types.Region>(Types.Region.ALL);
 
   const sortAlphabetically = (a: Types.Country, b: Types.Country) => {
     return a.name.localeCompare(b.name, "en", { sensitivity: "base" });
   };
 
+  const getCountries = async () => {
+    const data = await api.getCountries();
+    data.sort(sortAlphabetically);
+    setInitialCountries(data);
+    setCountries(data);
+  };
+
   useEffect(() => {
-    setTimeout(() => {
-      const data = mockData.sort(sortAlphabetically);
-      setInitialCountries(data);
-      setCountries(data);
-    }, 1000);
+    getCountries();
   }, []);
 
   useEffect(() => {
@@ -87,6 +92,20 @@ const Countries = () => {
     }
   }, [region]);
 
+  useEffect(() => {
+    if (areaRegion === Types.Region.ALL) {
+      setCountries(initialCountries);
+    } else {
+      const country = countries.find((country) => {
+        return country.name === Types.Region.LITHUANIA;
+      }) as Types.Country;
+      const filteredList = countries.filter((item) => {
+        return item.area < country.area;
+      });
+      setCountries(filteredList);
+    }
+  }, [areaRegion]);
+
   const toggleRegion = () => {
     setRegion(
       region === Types.Region.ALL ? Types.Region.OCEANIA : Types.Region.ALL
@@ -97,15 +116,31 @@ const Countries = () => {
     setOrder(order === Order.ASC ? Order.DESC : Order.ASC);
   };
 
+  const toggleArea = () => {
+    setAreaRegion(
+      areaRegion === Types.Region.ALL
+        ? Types.Region.LITHUANIA
+        : Types.Region.ALL
+    );
+  };
+
   return (
     <div className="countries">
       <h1>Countries</h1>
       <div className="buttons">
         <div className="left">
           <a href="#" onClick={toggleRegion}>
-            {region}
+            Show{" "}
+            {region === Types.Region.ALL
+              ? Types.Region.OCEANIA
+              : Types.Region.ALL}
           </a>
-          <a href="#">Second filter</a>
+          <a href="#" onClick={toggleArea}>
+            Show{" "}
+            {areaRegion === Types.Region.ALL
+              ? `< ${Types.Region.LITHUANIA}`
+              : Types.Region.ALL}
+          </a>
         </div>
         <div className="right">
           <a href="#" onClick={toggleOrder}>
