@@ -98,7 +98,9 @@ const Countries = () => {
           </button>
         </div>
         <div className="right">
-          <button onClick={toggleOrder}>{order}</button>
+          <button onClick={toggleOrder}>
+            {order} {order === Order.ASC ? "⇧" : "⇩"}
+          </button>
         </div>
       </div>
       {countries.map((country) => (

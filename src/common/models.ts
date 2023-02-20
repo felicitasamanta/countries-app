@@ -1,4 +1,4 @@
 export enum Order {
-  ASC = `Ascending ⇧`,
-  DESC = `Descending ⇩`,
+  ASC = `Ascending`,
+  DESC = `Descending`,
 }
