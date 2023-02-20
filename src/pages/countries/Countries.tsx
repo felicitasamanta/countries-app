@@ -1,54 +1,9 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Order } from "../../common/models";
 import { api } from "./common/api";
 import * as Types from "./common/models";
 import "./common/styles/countries.scss";
 import { Country } from "./components/Country";
-
-const mockData: Types.Countries = [
-  {
-    name: "Virgin Islands (British)",
-    region: "Oceania",
-    area: 151.0,
-    independent: false,
-  },
-  {
-    name: "Virgin Islands (U.S.)",
-    region: "Americas",
-    area: 346.36,
-    independent: false,
-  },
-  {
-    name: "Brunei Darussalam",
-    region: "Asia",
-    area: 5765.0,
-    independent: false,
-  },
-  {
-    name: "Bulgaria",
-    region: "Europe",
-    area: 110879.0,
-    independent: false,
-  },
-  {
-    name: "Burkina Faso",
-    region: "Africa",
-    area: 272967.0,
-    independent: false,
-  },
-  {
-    name: "Burundi",
-    region: "Africa",
-    area: 27834.0,
-    independent: false,
-  },
-  {
-    name: "Cambodia",
-    region: "Asia",
-    area: 181035.0,
-    independent: false,
-  },
-];
 
 const Countries = () => {
   const [initialCountries, setInitialCountries] = useState<Types.Countries>([]);
@@ -96,7 +51,7 @@ const Countries = () => {
     if (areaRegion === Types.Region.ALL) {
       setCountries(initialCountries);
     } else {
-      const country = countries.find((country) => {
+      const country = initialCountries.find((country) => {
         return country.name === Types.Region.LITHUANIA;
       }) as Types.Country;
       const filteredList = countries.filter((item) => {
@@ -129,23 +84,21 @@ const Countries = () => {
       <h1>Countries</h1>
       <div className="buttons">
         <div className="left">
-          <a href="#" onClick={toggleRegion}>
+          <button onClick={toggleRegion}>
             Show{" "}
             {region === Types.Region.ALL
               ? Types.Region.OCEANIA
               : Types.Region.ALL}
-          </a>
-          <a href="#" onClick={toggleArea}>
+          </button>
+          <button onClick={toggleArea}>
             Show{" "}
             {areaRegion === Types.Region.ALL
               ? `< ${Types.Region.LITHUANIA}`
               : Types.Region.ALL}
-          </a>
+          </button>
         </div>
         <div className="right">
-          <a href="#" onClick={toggleOrder}>
-            {order}
-          </a>
+          <button onClick={toggleOrder}>{order}</button>
         </div>
       </div>
       {countries.map((country) => (
