@@ -18,13 +18,6 @@ Start development server
 ```bash
 npm start
 ```
-
-Run tests
-
-```bash
-npm test
-```
-
 Run build
 
 ```bash
