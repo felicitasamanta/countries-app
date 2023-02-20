@@ -18,13 +18,6 @@ Start development server
 ```bash
 npm start
 ```
-
-Run tests
-
-```bash
-npm test
-```
-
 Run build
 
 ```bash
@@ -32,3 +25,5 @@ npm run build
 ```
 
 ## Preview
+![image](https://user-images.githubusercontent.com/75926838/220109731-727f6fa1-f64d-4435-9d3d-371abab05d64.png)
+
