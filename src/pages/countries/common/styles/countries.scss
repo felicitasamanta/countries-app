@@ -41,3 +41,21 @@
     }
   }
 }
+
+@media (max-width: 620px) {
+  .countries {
+    h1 {
+      text-align: center;
+    }
+    .buttons {
+      flex-direction: column;
+      width: 100%;
+      gap: 10px;
+      .left {
+        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  }
+}
